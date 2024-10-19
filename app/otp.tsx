@@ -17,25 +17,25 @@ import { AppContext } from '@/components/AppContext';
 export default function LoginScreen() {
   const { appState, setPhoneNumber, setToken } = useContext(AppContext)!;
   const [loading, setLoading] = useState(false);
-  const [phoneNumber, setLocalPhoneNumber] = useState("");
+  const [otp, setOtp] = useState("");
 
-  const createUserOtp = async () => {
-    setPhoneNumber(phoneNumber);
+  const authToken = async () => {
     setLoading(true);
     try {
-      const url = 'https://api.staging.v2.tnid.com/auth/create_user_otp';
+      const url = 'https://api.staging.v2.tnid.com/auth/token';
       const response = await fetch(url, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({'telephone_number': phoneNumber.replace('+', '')})
+        body: JSON.stringify({'telephone_number': appState.phoneNumber.replace('+', ''), "otp_code": otp})
       });
       const json = await response.json();
       if (json['message']) {
         alert(json['message']);
       } else {
-        router.navigate('/otp');
+        setToken(json['access_token'])
+        router.navigate('/spam-complaints');
       }
     } catch (error) {
       alert(error);
@@ -55,17 +55,16 @@ export default function LoginScreen() {
       }>
 
       <ThemedView>
-        <ThemedText type="title">Login</ThemedText>
+        <ThemedText type="title">OTP Validation</ThemedText>
         <TextInput
           style={styles.input}
-          onChangeText={setLocalPhoneNumber}
-          onSubmitEditing={createUserOtp}
-          value={phoneNumber}
-          autoComplete="tel"
-          placeholder="Phone number"
+          onChangeText={setOtp}
+          onSubmitEditing={authToken}
+          value={otp}
+          placeholder="OTP"
           keyboardType="phone-pad"
         />
-        <Button title="Log in" onPress={createUserOtp} />
+        <Button title="Submit" onPress={authToken} />
         <ActivityIndicator animating={loading} />
       </ThemedView>
     </ParallaxScrollView>
