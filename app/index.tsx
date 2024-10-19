@@ -6,6 +6,7 @@ import { ThemedTextInput } from '@/components/ThemedTextInput';
 import { ThemedView } from '@/components/ThemedView';
 import ThemedButton from '@/components/ThemedButton';
 import UserPanel from '@/components/UserPanel';
+import { PaperProvider } from 'react-native-paper';
 import RelayEnvironment from '@/components/RelayEnvironment';
 
 import React, { useState } from "react";
@@ -34,6 +35,7 @@ export default function LoginScreen() {
   };
 
   return (
+    <PaperProvider>
     <RelayEnvironment>
     <ParallaxScrollView
       headerBackgroundColor={{ light: '#A1CEDC', dark: '#1D3D47' }}
@@ -57,6 +59,7 @@ export default function LoginScreen() {
       </ThemedView>
     </ParallaxScrollView>
     </RelayEnvironment>
+    </PaperProvider>
   );
 }
 

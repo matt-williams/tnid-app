@@ -1,6 +1,6 @@
 const {useRelayEnvironment} = require('react-relay');
 import {Suspense} from 'react';
-import { loadQuery, useQueryLoader, usePreloadedQuery } from 'react-relay';
+import { loadQuery } from 'react-relay';
 import React, { useState, useEffect } from "react";
 import UserList, {UserQuery} from '@/components/UserList';
 
@@ -18,11 +18,6 @@ export default function UserPanel(props) {
       ))
     }
   }, []);
-
-//  const [queryReference, _loadQuery] = useQueryLoader(
-//    UserQuery,
-//    initialQueryReference,
-//  );
 
   return (
     <Suspense fallback="Loading...">
