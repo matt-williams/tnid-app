@@ -23,6 +23,27 @@ export const SpamReportQuery = graphql`
   }
 `;
 
+const CHANNEL_TYPES = {
+  'MMS': 'MMS',
+  'RCS': 'RCS',
+  'SMS': 'SMS',
+  'VOICE': 'Voice',
+};
+const ISSUE_TYPES = {
+  'FRAUD': 'Fraud',
+  'HARASSMENT': 'Harassment',
+  'ILLEGAL_CONTENT': 'Illegal content',
+  'SCAM': 'Scam',
+  'SPAM': 'Spam',
+};
+const STATUSES = {
+  'CLOSED': 'Closed',
+  'ESCALATED': 'Escalated',
+  'PROCESSING': 'Processing',
+  'REJECTED': 'Rejected',
+  'SUBMITTED': 'Submitted',
+};
+
 type Props = {
   queryReference: PreloadedQuery<SpamReportQueryType>,
 };
@@ -43,10 +64,10 @@ export default function SpamReportList({ queryReference }: Props) {
         <DataTable.Row key={report.id}>
           <DataTable.Cell>{report.timestamp}</DataTable.Cell>
           <DataTable.Cell>{report.fromNumber}</DataTable.Cell>
-          <DataTable.Cell>{report.channelType}</DataTable.Cell>
-          <DataTable.Cell>{report.issueType}</DataTable.Cell>
-          <DataTable.Cell>{report.status}</DataTable.Cell>
-          <DataTable.Cell>{report.firstName} {report.middleName} {report.LastName}</DataTable.Cell>
+          <DataTable.Cell>{CHANNEL_TYPES[report.channelType]}</DataTable.Cell>
+          <DataTable.Cell>{ISSUE_TYPES[report.issueType]}</DataTable.Cell>
+          <DataTable.Cell>{STATUSES[report.status]}</DataTable.Cell>
+          <DataTable.Cell>{report.user.firstName} {report.user.lastName}</DataTable.Cell>
         </DataTable.Row>
       )}
     </DataTable>

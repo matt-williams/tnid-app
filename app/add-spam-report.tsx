@@ -1,13 +1,12 @@
-import { Image, StyleSheet, Button } from 'react-native';
+import { Image, StyleSheet } from 'react-native';
 
 import ParallaxScrollView from '@/components/ParallaxScrollView';
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
-import SpamReportPanel from '@/components/SpamReportPanel';
 import RelayEnvironment from '@/components/RelayEnvironment';
-import { router } from 'expo-router';
+import AddSpamReport from '@/components/AddSpamReport';
 
-export default function SpamReportsScreen() {
+export default function AddSpamReportScreen() {
   return (
     <RelayEnvironment>
     <ParallaxScrollView
@@ -19,10 +18,9 @@ export default function SpamReportsScreen() {
         />
       }>
       <ThemedView>
-        <ThemedText type="title">Spam Reports</ThemedText>
+        <ThemedText type="title">Add Spam Report</ThemedText>
       </ThemedView>
-      <Button title="Add" onPress={() => {router.push('/add-spam-report')}} />
-      <SpamReportPanel />
+      <AddSpamReport />
     </ParallaxScrollView>
     </RelayEnvironment>
   );
