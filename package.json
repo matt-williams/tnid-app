@@ -55,6 +55,6 @@
   "relay": {
     "language": "typescript",
     "src": ".",
-    "schema": "./schema/tnid-company.graphql"
+    "schema": "./schema/tnid-user.graphql"
   }
 }

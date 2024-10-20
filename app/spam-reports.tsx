@@ -3,7 +3,7 @@ import { Image, StyleSheet } from 'react-native';
 import ParallaxScrollView from '@/components/ParallaxScrollView';
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
-import UserPanel from '@/components/UserPanel';
+import SpamReportPanel from '@/components/SpamReportPanel';
 import RelayEnvironment from '@/components/RelayEnvironment';
 
 export default function UsersScreen() {
@@ -18,8 +18,8 @@ export default function UsersScreen() {
         />
       }>
       <ThemedView>
-        <ThemedText type="title">Users</ThemedText>
-       <UserPanel />
+        <ThemedText type="title">Spam Reports</ThemedText>
+       <SpamReportPanel />
       </ThemedView>
     </ParallaxScrollView>
     </RelayEnvironment>

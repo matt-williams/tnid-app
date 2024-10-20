@@ -1,0 +1,186 @@
+schema {
+  query: RootQueryType
+  mutation: RootMutationType
+}
+
+"""
+The `Date` scalar type represents a date. The Date appears in a JSON
+response as an ISO8601 formatted string, without a time component.
+"""
+scalar Date
+
+"""
+The `Json` scalar type represents arbitrary json string data, represented as UTF-8
+character sequences. The Json type is most often used to represent a free-form
+human-readable json string.
+"""
+scalar Json
+
+type RootMutationType {
+  createSpamReport(
+    """Channel type of the spam report you want to create"""
+    channelType: SpamReportChannelType!
+
+    """Origin number of the content that the report is about"""
+    fromNumber: String!
+
+    """Issue type of the spam report you want to create"""
+    issueType: SpamReportIssueType
+
+    """Content of the SMS the report is about"""
+    messageContent: String
+
+    """Any additional information as stringified JSON"""
+    metadata: Json
+
+    """Date and time of the incident"""
+    timestamp: NaiveDateTime!
+
+    """Receiver number of the content that the report is about"""
+    toNumber: String!
+
+    """Aditional notes by the user"""
+    userNote: String
+  ): SpamReport
+  updateUser(
+    """About me of the user"""
+    aboutMe: String
+
+    """Birthdate of the user"""
+    birthdate: Date
+
+    """First name of the user"""
+    firstName: String
+
+    """Last name of the user"""
+    lastName: String
+
+    """Additional information"""
+    metadata: Json
+
+    """Middle name of the user"""
+    middleName: String
+
+    """Username of the user"""
+    username: String
+  ): User
+}
+
+"""
+The `Naive DateTime` scalar type represents a naive date and time without
+timezone. The DateTime appears in a JSON response as an ISO8601 formatted
+string.
+"""
+scalar NaiveDateTime
+
+type RootQueryType {
+  spamReports(
+    """Filter by the channel type of the spam report"""
+    channelType: SpamReportChannelType
+
+    """Filter by excluding the status of the spam report"""
+    excludedStatus: SpamReportStatus
+
+    """Filter by the status of the spam report"""
+    includedStatus: SpamReportStatus
+
+    """Filter by the issue type of the spam report"""
+    issueType: SpamReportIssueType
+
+    """Limit number of results"""
+    limit: Int
+  ): [SpamReport]
+}
+
+type SpamReport {
+  """The channel type of the spam report"""
+  channelType: SpamReportChannelType
+
+  """The date and time the spam report was created"""
+  createdAt: NaiveDateTime
+
+  """The number that the content of the report arrived from"""
+  fromNumber: String
+
+  """The unique identifier of the Spam Report"""
+  id: ID
+
+  """The issue type of the spam report"""
+  issueType: SpamReportIssueType
+
+  """If the report is about an SMS the content of the SMS"""
+  messageContent: String
+
+  """Additional metadata"""
+  metadata: Json
+
+  """Current status of the spam report"""
+  status: SpamReportStatus
+
+  """The date and time the the spam report happened"""
+  timestamp: NaiveDateTime
+
+  """The number that the content of the report arrived to"""
+  toNumber: String
+
+  """The date and time the spam report was last updated"""
+  updatedAt: NaiveDateTime
+
+  """User reporting the incident."""
+  user: User
+
+  """Additional note from the user"""
+  userNote: String
+}
+
+"""The channel type of a spam report"""
+enum SpamReportChannelType {
+  MMS
+  RCS
+  SMS
+  VOICE
+}
+
+"""The issue type of a spam report"""
+enum SpamReportIssueType {
+  FRAUD
+  HARASSMENT
+  ILLEGAL_CONTENT
+  SCAM
+  SPAM
+}
+
+"""The status of a spam report"""
+enum SpamReportStatus {
+  CLOSED
+  ESCALATED
+  PROCESSING
+  REJECTED
+  SUBMITTED
+}
+
+type User {
+  """The about me of the user"""
+  aboutMe: String
+
+  """The birthdate of the user"""
+  birthdate: Date
+
+  """The first name of the user"""
+  firstName: String
+
+  """The unique identifier of the user"""
+  id: String
+
+  """The last name of the user"""
+  lastName: String
+
+  """Additional metadata"""
+  metadata: Json
+
+  """The middle name of the user"""
+  middleName: String
+
+  """The username of the user"""
+  username: String!
+}

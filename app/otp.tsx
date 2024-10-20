@@ -35,7 +35,7 @@ export default function LoginScreen() {
         alert(json['message']);
       } else {
         setToken(json['access_token'])
-        router.navigate('/spam-complaints');
+        router.navigate('/spam-reports');
       }
     } catch (error) {
       alert(error);
