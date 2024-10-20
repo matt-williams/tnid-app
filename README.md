@@ -2,9 +2,10 @@
 
 This is a [React Native](https://reactnative.dev/) app to access the [TNID API](https://docs.tnid.com/), developed as part of [TADHack Global 2024](https://tadhack.com/2024/).
 
-It currently supports
-*   requesting an OTP token to log in as a user
-*   retrieving the list of other users (as a company).
+It supports
+*   authentication
+*   listing spam reports
+*   adding new spam reports.
 
 It *should* be deployable natively on Android and iOS, although it's so far only been tested in a web browser.
 
