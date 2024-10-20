@@ -4,7 +4,6 @@ import ParallaxScrollView from '@/components/ParallaxScrollView';
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedTextInput } from '@/components/ThemedTextInput';
 import { ThemedView } from '@/components/ThemedView';
-import ThemedButton from '@/components/ThemedButton';
 import UserPanel from '@/components/UserPanel';
 import RelayEnvironment from '@/components/RelayEnvironment';
 import { ActivityIndicator } from 'react-native-paper';
